@@ -19,7 +19,7 @@ def run_app():
             routes.pic_user,
             route_name="picuser",
             renderer="json",
-            request_method="POST",
+            request_method="GET",
         )
 
         config.add_route("registerusers", f"{BASE_API_PATH}/registerusers")
