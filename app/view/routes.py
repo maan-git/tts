@@ -1,22 +1,21 @@
 from pyramid.response import Response
-from pyramid.view import view_config
-
-from app.controller.user_controller import user_controller
+from app.controller.user_controller import UserController
 
 
-@view_config(route_name="helloworld", request_method="GET")
 def hello_world(request):
-    return Response("Hello World!")
+    return {"message": "Hello World!"}
 
 
-@view_config(route_name="picuser", request_method="GET")
 def pic_user(request):
-    return Response("Testing")
+    return {"data": request.json_body.get("user", "user was not provided")}
 
 
-@view_config(route_name="registerusers", request_method="POST")
 def register_users(request):
+    users = request.json_body.get("users", "user was not provided")
 
-    _user_controller = user_controller()
-    _user_controller.pic_user()
-    return Response(request)
+    print({"data": request.json_body.get("users", "user was not provided")})
+
+    _user_controller = UserController.user_controller()
+    _user_controller.register_users(users)
+
+    return {"data": request.json_body.get("users", "user was not provided")}
